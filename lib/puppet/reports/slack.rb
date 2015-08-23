@@ -34,13 +34,13 @@ Puppet::Reports.register_report(:slack) do
                   'warning'
               end
 
-      message = { channel:  SLACK_CHANNEL,
-                  username: SLACK_BOTNAME,
-                  icon_url: SLACK_ICONURL,
-                  attachments: [{ fallback: "Puppet run for #{self.host} `#{self.status}` at #{Time.now.asctime}",
-                                  color: color,
-                                  text: "Puppet run for #{self.host} `#{self.status}` at #{Time.now.asctime}",
-                                  mrkdwn_in: ["text"] }]}
+      message = { :channel =>  SLACK_CHANNEL,
+                  :username => SLACK_BOTNAME,
+                  :icon_url => SLACK_ICONURL,
+                  :attachments => [{ :fallback => "Puppet run for #{self.host} `#{self.status}` at #{Time.now.asctime}",
+                                     :color => color,
+                                     :text => "Puppet run for #{self.host} `#{self.status}` at #{Time.now.asctime}",
+                                     :mrkdwn_in => ["text"] }]}
 
       conn.post do |req|
         req.body = JSON.dump(message)
